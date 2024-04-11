@@ -516,7 +516,25 @@ body{
     }
 
     .header-text{
-        height: 500px;
+        padding-top: 100px;
+    }
+
+    .hotel-image-container{
+        grid-column: 1/9;
+        height: 300px;
+        padding: 1.5rem;
+    }
+
+    .hotel-details{
+        grid-column: 1/9;
+    }
+
+    .modal{
+        padding-top: 130px;
+    }
+
+    .modal-content{
+        grid-column: 2/8;
     }
 }
 
@@ -570,5 +588,24 @@ body{
     .hero-cards{
         flex-direction: column;
         row-gap: 12px;
+    }
+
+    .hotel-image-container{
+        height: 200px;
+        border-radius: var(--radius-medium);
+        grid-column: 1/5;
+        padding: 1rem;
+    }
+
+    .hotel-details{
+        grid-column: 1/5;
+    }
+
+    .modal{
+        padding-top: 130px;
+    }
+
+    .modal-content{
+        grid-column: 1/5;
     }
 }
