@@ -1,0 +1,9 @@
+.crossed-text{
+    text-decoration-line: line-through;
+    color: gray;
+}
+
+.default-text{
+    text-decoration-line: none;
+    color: black;
+}
