@@ -28,7 +28,10 @@ const addTask = () => {
 		showDeleteModal(listItem);
 	});
 	listItem.append(deleteButton);
+	listItemSpan.style.wordWrap = "break-word";
 	listItem.append(listItemSpan);
+	listItem.classList.add("list-group-item");
+	listItem.classList.add("list-item");
 	listItemSpan.addEventListener("click", function () {
 		toggleDone(listItem);
 	});
@@ -77,6 +80,25 @@ const revert = () => {
 	}
 };
 
+const toggleList = (elementId) => {
+	let newId;
+	switch (elementId) {
+		case "pilne-text":
+			newId = "pilne-list";
+			break;
+		case "wazne-text":
+			newId = "wazne-list";
+			break;
+		case "niewazne-text":
+			newId = "niewazne-list";
+			break;
+		default:
+			return;
+	}
+	const list = document.getElementById(newId);
+	list.hidden = !list.hidden;
+};
+
 window.onload = () => {
 	const button1 = document.getElementById("yes-button");
 	button1.addEventListener("click", () => {
@@ -90,4 +112,11 @@ window.onload = () => {
 		const modal = document.getElementById("my-modal");
 		modal.close();
 	});
+
+	const titles = document.getElementsByTagName("h2");
+	for (let element of titles) {
+		element.addEventListener("click", () => {
+			toggleList(element.id);
+		});
+	}
 };

@@ -1,21 +1,56 @@
-.crossed-text{
-    text-decoration-line: line-through;
-    color: gray;
+.crossed-text {
+	text-decoration-line: line-through;
+	color: gray;
 }
 
-.default-text{
-    text-decoration-line: none;
-    color: black;
-}
-.flex{
-    display: flex;
-    flex-direction: row;
-    column-gap: 20px;
+.default-text {
+	text-decoration-line: none;
+	color: black;
 }
 
-.list{
-    border-color: black;
-    border-radius: 10px;
-    border-width: 3px;
-    border-style: solid;
+.list {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+}
+
+.lists {
+	display: grid;
+	grid-template-columns: repeat(13, 1fr);
+}
+
+.lists > .list:nth-child(1) {
+	grid-column: 2/5;
+}
+
+.lists > .list:nth-child(2) {
+	grid-column: 6/9;
+}
+
+.lists > .list:nth-child(3) {
+	grid-column: 10/13;
+}
+
+.panel {
+	padding-bottom: 30px;
+	display: flex;
+	flex-direction: column;
+	row-gap: 15px;
+	width: 100%;
+	align-items: center;
+}
+
+h2 {
+	align-self: center;
+}
+
+.list-group {
+	width: 100%;
+}
+
+dialog {
+	border-radius: 10px;
+	border-width: 1px;
+	width: 70%;
 }
