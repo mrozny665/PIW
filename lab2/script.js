@@ -19,20 +19,26 @@ const addTask = () => {
 
 	const taskList = document.getElementById(listValue);
 	const listItem = document.createElement("li");
-	const listItemSpan = document.createElement("span");
+	const div1 = document.createElement("div");
+	div1.classList.add("button-div");
+	const div2 = document.createElement("div");
+	div2.classList.add("text-div");
+	const listItemPara = document.createElement("p");
 	const deleteButton = document.createElement("button");
-	listItemSpan.innerText = `${input2}`;
-	deleteButton.classList.add("btn", "btn-danger", "btn-sm");
+	listItemPara.innerText = `${input2}`;
+	deleteButton.classList.add("btn", "btn-danger", "btn-sm", "btn-x");
 	deleteButton.innerText = "X";
 	deleteButton.addEventListener("click", function () {
 		showDeleteModal(listItem);
 	});
-	listItem.append(deleteButton);
-	listItemSpan.style.wordWrap = "break-word";
-	listItem.append(listItemSpan);
+	listItemPara.classList.add("default-text");
 	listItem.classList.add("list-group-item");
 	listItem.classList.add("list-item");
-	listItemSpan.addEventListener("click", function () {
+	div1.append(deleteButton);
+	div2.append(listItemPara);
+	listItem.append(div1);
+	listItem.append(div2);
+	listItem.addEventListener("click", function () {
 		toggleDone(listItem);
 	});
 	taskList.append(listItem);
@@ -43,20 +49,23 @@ const toggleDone = (element) => {
 	const stringDate = ` ${date.getDate()} - ${
 		date.getMonth() + 1
 	} - ${date.getFullYear()}`;
-	if (!element.childNodes[1].classList.contains("crossed-text")) {
-		const dateSpan = document.createElement("span");
+	const div = element.getElementsByClassName("text-div")[0];
+	if (!div.childNodes[0].classList.contains("crossed-text")) {
+		const dateSpan = document.createElement("p");
 		dateSpan.innerText = stringDate;
 		dateSpan.classList.add("default-text");
-		element.appendChild(dateSpan);
+		div.appendChild(dateSpan);
 	} else {
-		element.removeChild(element.lastChild);
+		div.removeChild(div.lastChild);
 	}
-	element.childNodes[1].classList.toggle("crossed-text");
+	div.childNodes[0].classList.toggle("crossed-text");
+	div.childNodes[0].classList.toggle("default-text");
 };
 
 const showDeleteModal = (element) => {
+	toggleDone(element);
 	const modal = document.getElementById("my-modal");
-	const text = element.childNodes[1].innerText;
+	const text = element.childNodes[1].childNodes[0].innerText;
 	const taskText = document.getElementById("task-text");
 	taskText.innerText = text;
 	elementToRemove = null;
