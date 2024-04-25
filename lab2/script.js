@@ -89,8 +89,9 @@ const revert = () => {
 	}
 };
 
-const toggleList = (elementId) => {
+const toggleList = (element) => {
 	let newId;
+	const elementId = element.id;
 	switch (elementId) {
 		case "pilne-text":
 			newId = "pilne-list";
@@ -105,6 +106,12 @@ const toggleList = (elementId) => {
 			return;
 	}
 	const list = document.getElementById(newId);
+	if (list.hidden) {
+		element.childNodes[1].innerText = " ↓";
+	} else {
+		element.childNodes[1].innerText = " ↑";
+	}
+	console.log(element.childNodes);
 	list.hidden = !list.hidden;
 };
 
@@ -123,9 +130,9 @@ window.onload = () => {
 	});
 
 	const titles = document.getElementsByTagName("h2");
-	for (let element of titles) {
+	for (const element of titles) {
 		element.addEventListener("click", () => {
-			toggleList(element.id);
+			toggleList(element);
 		});
 	}
 };
