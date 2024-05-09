@@ -1,5 +1,6 @@
 {
   "hosting": {
+	  "site": "piw-lab-lm",
     "public": "build",
     "ignore": [
       "firebase.json",

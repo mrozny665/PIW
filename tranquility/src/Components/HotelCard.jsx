@@ -1,5 +1,6 @@
 import fullHeart from "../Assets/fullHeart.svg";
 import Arrow from "../Assets/Arrow.svg";
+import { Link } from "react-router-dom";
 
 const HotelCard = ({ element }) => {
 	const stars = () => {
@@ -12,6 +13,8 @@ const HotelCard = ({ element }) => {
 		}
 		return <span>{span}</span>;
 	};
+
+	const link = "hotel/" + element.id;
 
 	return (
 		<article class="hotel-card">
@@ -27,9 +30,11 @@ const HotelCard = ({ element }) => {
 				<p class="text-middle">{stars()}</p>
 				<p class="text-middle">{element.price}€/room</p>
 			</div>
-			<button class="button primary">
-				View offer <img src={Arrow} />
-			</button>
+			<Link to={link} class="link-button">
+				<button class="button primary" style={{ width: "100%" }}>
+					View offer <img src={Arrow} />
+				</button>
+			</Link>
 		</article>
 	);
 };

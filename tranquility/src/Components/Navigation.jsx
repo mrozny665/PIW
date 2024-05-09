@@ -2,7 +2,7 @@ import logo from "../Assets/logo.svg";
 
 const Navigation = () => {
 	return (
-		<nav className="fixedNavigation">
+		<nav className="fixed-navigation">
 			<img className="logo" src={logo} />
 			<ul className="nav-links">
 				<li>
@@ -30,7 +30,7 @@ const Navigation = () => {
 						Favorites
 					</a>
 				</li>
-				<button className="button primary">Log in</button>
+				<button className="button primary">Log out</button>
 			</ul>
 		</nav>
 	);
