@@ -1,6 +1,8 @@
 import logo from "../Assets/logo.svg";
 
-const Navigation = () => {
+const Navigation = ({ set }) => {
+	const openAdd = () => {};
+
 	return (
 		<nav className="fixed-navigation">
 			<img className="logo" src={logo} />
@@ -16,7 +18,7 @@ const Navigation = () => {
 					</a>
 				</li>
 				<li>
-					<a className="nav-link" href="#addnewoffers">
+					<a className="nav-link" onClick={() => set(true)}>
 						Add new offers
 					</a>
 				</li>

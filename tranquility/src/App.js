@@ -9,9 +9,10 @@ import {
 	Route,
 	createBrowserRouter,
 	createRoutesFromElements,
-	NavLink,
 } from "react-router-dom";
 import HotelPage from "./Pages/HotelPage";
+import Navigation from "./Components/Navigation";
+import AddNewHotel from "./Components/AddNewHotel";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -24,10 +25,15 @@ const router = createBrowserRouter(
 
 function AppLayout() {
 	const [hotels, setHotels] = useState(startingHotels);
+	const [isOpen, setIsOpen] = useState(false);
 
 	return (
 		<div className="App">
-			<Outlet />
+			<Navigation set={setIsOpen} />
+			<Outlet context={[hotels, setHotels]} />
+			{isOpen && (
+				<AddNewHotel set={setIsOpen} hotels={hotels} setHotels={setHotels} />
+			)}
 		</div>
 	);
 }

@@ -1,16 +1,12 @@
 import HotelCard from "../Components/HotelCard";
-import Navigation from "../Components/Navigation";
-import startingHotels from "../data";
-import { Outlet, Link } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 
 const Hotels = () => {
-	const hotelCards = startingHotels.map((it) => (
-		<HotelCard key={it.id} element={it} />
-	));
+	const [hotels, setHotels] = useOutletContext();
+	const hotelCards = hotels.map((it) => <HotelCard key={it.id} element={it} />);
 
 	return (
 		<div>
-			<Navigation />
 			<section
 				class="header-text"
 				style={{ paddingTop: "100px", paddingLeft: "50px" }}

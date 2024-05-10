@@ -418,16 +418,34 @@ body {
 	font-size: 24px;
 }
 
+.modal-section {
+	display: flex;
+	flex-direction: row;
+	column-gap: 10px;
+	justify-content: space-between;
+	align-items: center;
+}
+
 .modal-text {
 	border-style: solid;
 	border-radius: var(--radius-small);
 	border-color: var(--primary-dark);
 	border-width: 1px;
-	width: auto;
+	width: 88%;
 	height: 200px;
 	padding: 20px;
 	resize: none;
 	font-family: "Roboto Flex", sans-serif;
+}
+
+.modal-input {
+	border-style: solid;
+	border-radius: var(--radius-small);
+	border-color: var(--primary-dark);
+	border-width: 1px;
+	width: 88%;
+	height: 50px;
+	padding-left: 10px;
 }
 
 .modal-buttons {

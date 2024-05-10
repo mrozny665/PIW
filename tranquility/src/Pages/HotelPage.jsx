@@ -1,17 +1,16 @@
-import Navigation from "../Components/Navigation";
-import { useParams } from "react-router-dom";
-import startingHotels from "../data";
+import { useOutletContext, useParams } from "react-router-dom";
 import emptyHeart from "../Assets/emptyHeart.svg";
 import iconMail from "../Assets/🦆 icon _mail_.png";
 
 const HotelPage = () => {
+	const [hotels, setHotels] = useOutletContext();
 	const { id } = useParams();
 
 	const findElement = (el) => {
 		return el.id == id;
 	};
 
-	const element = startingHotels.find(findElement);
+	const element = hotels.find(findElement);
 
 	const stars = () => {
 		let span = "";
@@ -26,7 +25,6 @@ const HotelPage = () => {
 
 	return (
 		<div>
-			<Navigation />
 			<section id="hotel" class="grid hotel-section">
 				<section class="header-text">
 					<p class="title-large">{element.name}</p>
