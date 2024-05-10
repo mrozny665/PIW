@@ -1,4 +1,5 @@
 import logo from "../Assets/logo.svg";
+import { NavLink } from "react-router-dom";
 
 const Navigation = ({ set }) => {
 	const openAdd = () => {};
@@ -8,17 +9,21 @@ const Navigation = ({ set }) => {
 			<img className="logo" src={logo} />
 			<ul className="nav-links">
 				<li>
-					<a className="nav-link" href="index.html">
+					<a className="nav-link" href="#home">
 						Home
 					</a>
 				</li>
 				<li>
-					<a className="nav-link" href="#">
+					<NavLink className="nav-link" to="/">
 						Find offers
-					</a>
+					</NavLink>
 				</li>
 				<li>
-					<a className="nav-link" onClick={() => set(true)}>
+					<a
+						className="nav-link"
+						onClick={() => set(true)}
+						style={{ cursor: "pointer" }}
+					>
 						Add new offers
 					</a>
 				</li>
