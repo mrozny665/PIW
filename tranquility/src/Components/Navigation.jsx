@@ -1,8 +1,13 @@
 import logo from "../Assets/logo.svg";
 import { NavLink } from "react-router-dom";
+import { useUser } from "../data/userService";
+import { logout } from "../data/userService";
+import startingHotels from "../data";
+import { createHotel } from "../data/hotelsService";
 
 const Navigation = ({ set }) => {
 	const openAdd = () => {};
+	const user = useUser();
 
 	return (
 		<nav className="fixed-navigation">
@@ -37,7 +42,17 @@ const Navigation = ({ set }) => {
 						Favorites
 					</a>
 				</li>
-				<button className="button primary">Log out</button>
+				{/* <button className="button primary">Log out</button> */}
+				{!!user || (
+					<NavLink to="login" className="link-button">
+						<button class="button primary">Login</button>
+					</NavLink>
+				)}
+				{!!user && (
+					<button class="button primary" onClick={logout}>
+						Logout
+					</button>
+				)}
 			</ul>
 		</nav>
 	);

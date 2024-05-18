@@ -461,6 +461,10 @@ body {
 	text-decoration: none;
 }
 
+NavLink {
+	text-decoration: none;
+}
+
 @media screen and (max-width: 768px) {
 	.hidden {
 		display: inline;

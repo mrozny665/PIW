@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { createHotel } from "../data/hotelsService";
 
 const AddNewHotel = ({ set, hotels, setHotels }) => {
 	const [hotelName, setHotelName] = useState("");
@@ -19,6 +20,7 @@ const AddNewHotel = ({ set, hotels, setHotels }) => {
 		};
 		const hotelList = hotels;
 		setHotels(hotelList.concat([hotel]));
+		createHotel(hotel);
 	};
 
 	return (
