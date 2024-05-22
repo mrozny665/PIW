@@ -5,12 +5,22 @@ import {
 	signInWithEmailAndPassword,
 	signInWithPopup,
 	signOut,
+	createUserWithEmailAndPassword,
 } from "firebase/auth";
 
 const googleProvider = new GoogleAuthProvider();
 
 export const loginGoogle = async (navigate) => {
 	const userCredentials = await signInWithPopup(auth, googleProvider);
+	if (userCredentials.user) navigate("/");
+};
+
+export const signInEmail = async (navigate, email, password) => {
+	const userCredentials = await createUserWithEmailAndPassword(
+		auth,
+		email,
+		password
+	);
 	if (userCredentials.user) navigate("/");
 };
 

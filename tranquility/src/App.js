@@ -13,7 +13,11 @@ import HotelPage from "./Pages/HotelPage";
 import Navigation from "./Components/Navigation";
 import AddNewHotel from "./Components/AddNewHotel";
 import Login from "./Pages/Login";
+import UserHotels from "./Pages/UserHotels";
 import { readAllHotels } from "./data/hotelsService";
+import { useUser } from "./data/userService";
+import NavigationOut from "./Components/NavigationOut";
+import Signup from "./Pages/Signup";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -21,6 +25,8 @@ const router = createBrowserRouter(
 			<Route path="" element={<Hotels />} />
 			<Route path="hotel/:id" element={<HotelPage />} />
 			<Route path="login" element={<Login />} />
+			<Route path="myoffers" element={<UserHotels />} />
+			<Route path="signup" element={<Signup />} />
 		</Route>
 	)
 );
@@ -28,6 +34,7 @@ const router = createBrowserRouter(
 function AppLayout() {
 	const [hotels, setHotels] = useState([]);
 	const [isOpen, setIsOpen] = useState(false);
+	const user = useUser();
 
 	useEffect(() => {
 		readAllHotels().then((docs) => setHotels(docs));
@@ -35,7 +42,8 @@ function AppLayout() {
 
 	return (
 		<div className="App">
-			<Navigation set={setIsOpen} />
+			{!!user || <NavigationOut />}
+			{!!user && <Navigation set={setIsOpen} />}
 			<Outlet context={[hotels, setHotels]} />
 			{isOpen && (
 				<AddNewHotel set={setIsOpen} hotels={hotels} setHotels={setHotels} />

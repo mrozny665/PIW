@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { loginEmail, loginGoogle } from "../data/userService";
+import { loginEmail, loginGoogle, signInEmail } from "../data/userService";
 import { useNavigate, NavLink } from "react-router-dom";
 
-const Login = () => {
+const Signup = () => {
 	const navigate = useNavigate();
 	const [email, setEmail] = useState();
 	const [password, setPassword] = useState();
@@ -15,7 +15,7 @@ const Login = () => {
 				value={email}
 				onChange={(e) => setEmail(e.target.value)}
 			/>
-			<label htmlFor="pasword">Password</label>
+			<label htmlFor="password">Password</label>
 			<input
 				id="password"
 				type="password"
@@ -25,22 +25,18 @@ const Login = () => {
 			<br></br>
 			<button
 				className="button primary"
-				onClick={() => loginEmail(navigate, email, password)}
+				onClick={() => signInEmail(navigate, email, password)}
 			>
-				Login with email
+				Signup with email
 			</button>
-
-			<br />
-			<br />
-			<button className="button primary" onClick={() => loginGoogle(navigate)}>
-				Login with Google
-			</button>
-			<label htmlFor="signup-button">If you don't have an account yet:</label>
-			<NavLink to="../signup" class="link-button" id="signup-button">
-				<button class="button primary">Sign up</button>
+			<label htmlFor="login-button">
+				If you already have an account or want to use your Google account:
+			</label>
+			<NavLink to="../login" class="link-button" id="login-button">
+				<button class="button primary">Log in</button>
 			</NavLink>
 		</main>
 	);
 };
 
-export default Login;
+export default Signup;
