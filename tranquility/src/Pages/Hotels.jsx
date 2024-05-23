@@ -2,8 +2,11 @@ import HotelCard from "../Components/HotelCard";
 import { useOutletContext } from "react-router-dom";
 
 const Hotels = () => {
-	const [hotels, setHotels] = useOutletContext();
-	const hotelCards = hotels.map((it) => <HotelCard key={it.id} element={it} />);
+	const edit = false;
+	const [hotels, setHotels, setIsOpen] = useOutletContext();
+	const hotelCards = hotels.map((it) => (
+		<HotelCard key={it.id} element={it} edit={edit} />
+	));
 
 	return (
 		<div>

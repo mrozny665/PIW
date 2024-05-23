@@ -1,8 +1,9 @@
 import { useOutletContext, useParams } from "react-router-dom";
 import emptyHeart from "../Assets/emptyHeart.svg";
-import iconMail from "../Assets/🦆 icon _mail_.png";
+import deleteIcon from "../Assets/delete.png";
+import editIcon from "../Assets/edit.png";
 
-const HotelPage = () => {
+const HotelPageEditable = () => {
 	const [hotels, setHotels, setIsOpen] = useOutletContext();
 	const { id } = useParams();
 
@@ -54,8 +55,15 @@ const HotelPage = () => {
 							{element.longText}
 						</p>
 					</section>
+					<button
+						class="button primary"
+						style={{ width: "fit-content" }}
+						onMouseDown={() => setIsOpen(true)}
+					>
+						Edit <img src={editIcon} />
+					</button>
 					<button class="button primary" style={{ width: "fit-content" }}>
-						Contact <img src={iconMail} />
+						Remove <img src={deleteIcon} />
 					</button>
 					<section class="hotel-details-cards">
 						<div class="card-image"></div>
@@ -67,4 +75,4 @@ const HotelPage = () => {
 	);
 };
 
-export default HotelPage;
+export default HotelPageEditable;

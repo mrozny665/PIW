@@ -3,9 +3,10 @@ import HotelCard from "../Components/HotelCard";
 import { readUserHotels } from "../data/hotelsService";
 
 const UserHotels = () => {
+	const edit = true;
 	const [userHotels, setUserHotels] = useState([]);
 	const hotelCards = userHotels.map((it) => (
-		<HotelCard key={it.id} element={it} />
+		<HotelCard key={it.id} element={it} edit={edit} />
 	));
 
 	useEffect(() => {

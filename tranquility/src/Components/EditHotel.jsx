@@ -1,14 +1,20 @@
-import { useState } from "react";
-import { createHotel } from "../data/hotelsService";
+import { useEffect, useState } from "react";
+import { createHotel, updateHotel } from "../data/hotelsService";
+import { useParams } from "react-router-dom";
 
-const AddNewHotel = ({ set }) => {
+const EditHotel = ({ set, hotels }) => {
 	const [hotelName, setHotelName] = useState("");
 	const [description, setDescription] = useState("");
 	const [location, setLocation] = useState("");
 	const [price, setPrice] = useState("");
 	const [localCategory, setLocalCategory] = useState("");
+	const { id } = useParams();
 
-	const addHotel = () => {
+	const hotelData = hotels.find((el) => {
+		return id === el.id;
+	});
+
+	const editHotel = () => {
 		const hotel = {
 			name: hotelName,
 			text: description,
@@ -17,16 +23,30 @@ const AddNewHotel = ({ set }) => {
 			stars: localCategory,
 			city: location,
 		};
-		createHotel(hotel);
+		updateHotel(id, hotel);
 		set(false);
 	};
+
+	const init = () => {
+		setHotelName(hotelData.name);
+		setDescription(hotelData.text);
+		setLocation(hotelData.city);
+		setPrice(hotelData.price);
+		setLocalCategory(hotelData.stars);
+	};
+
+	useEffect(() => {
+		init();
+	}, []);
 
 	return (
 		<modal class="grid modal">
 			<section class="modal-content">
 				<section class="modal-start">
-					<p class="modal-close">&times;</p>
-					<p class="title-large">Add new offer</p>
+					<p class="modal-close" onMouseDown={() => set(false)}>
+						&times;
+					</p>
+					<p class="title-large">Edit offer</p>
 				</section>
 				<section class="modal-section">
 					<label>Hotel name</label>
@@ -82,10 +102,10 @@ const AddNewHotel = ({ set }) => {
 					<button
 						class="primary button"
 						onMouseDown={() => {
-							addHotel();
+							editHotel();
 						}}
 					>
-						Add
+						Edit
 					</button>
 				</section>
 			</section>
@@ -93,4 +113,4 @@ const AddNewHotel = ({ set }) => {
 	);
 };
 
-export default AddNewHotel;
+export default EditHotel;

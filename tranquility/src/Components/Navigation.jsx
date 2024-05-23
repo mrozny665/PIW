@@ -27,7 +27,7 @@ const Navigation = ({ set }) => {
 				<li>
 					<a
 						className="nav-link"
-						onClick={() => set(true)}
+						onMouseDown={() => set(true)}
 						style={{ cursor: "pointer" }}
 					>
 						Add new offers
@@ -45,7 +45,7 @@ const Navigation = ({ set }) => {
 				</li>
 				<button
 					class="button primary"
-					onClick={() => {
+					onMouseDown={() => {
 						logout();
 						navigate("/");
 					}}

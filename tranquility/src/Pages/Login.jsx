@@ -25,14 +25,17 @@ const Login = () => {
 			<br></br>
 			<button
 				className="button primary"
-				onClick={() => loginEmail(navigate, email, password)}
+				onMouseDown={() => loginEmail(navigate, email, password)}
 			>
 				Login with email
 			</button>
 
 			<br />
 			<br />
-			<button className="button primary" onClick={() => loginGoogle(navigate)}>
+			<button
+				className="button primary"
+				onMouseDown={() => loginGoogle(navigate)}
+			>
 				Login with Google
 			</button>
 			<label htmlFor="signup-button">If you don't have an account yet:</label>

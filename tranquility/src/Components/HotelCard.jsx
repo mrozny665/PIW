@@ -2,7 +2,7 @@ import fullHeart from "../Assets/fullHeart.svg";
 import Arrow from "../Assets/Arrow.svg";
 import { Link } from "react-router-dom";
 
-const HotelCard = ({ element }) => {
+const HotelCard = ({ element, edit }) => {
 	const stars = () => {
 		let span = "";
 		for (let i = 0; i < element.stars; i++) {
@@ -14,7 +14,7 @@ const HotelCard = ({ element }) => {
 		return <span>{span}</span>;
 	};
 
-	const link = "hotel/" + element.id;
+	const link = edit ? element.id : "hotels/" + element.id;
 
 	return (
 		<article class="hotel-card">
