@@ -1,8 +1,9 @@
 import fullHeart from "../Assets/fullHeart.svg";
+import emptyHeart from "../Assets/emptyHeart.svg";
 import Arrow from "../Assets/Arrow.svg";
 import { Link } from "react-router-dom";
 
-const HotelCard = ({ element, edit }) => {
+const HotelCard = ({ element, edit, favorite }) => {
 	const stars = () => {
 		let span = "";
 		for (let i = 0; i < element.stars; i++) {
@@ -14,6 +15,12 @@ const HotelCard = ({ element, edit }) => {
 		return <span>{span}</span>;
 	};
 
+	const findElement = (el) => {
+		return el.id === element.id;
+	};
+
+	const isFavorite = !(favorite.find(findElement) === undefined);
+
 	const link = edit ? element.id : "hotels/" + element.id;
 
 	return (
@@ -21,7 +28,7 @@ const HotelCard = ({ element, edit }) => {
 			<div class="card-image">
 				<p class="chip">{element.city}</p>
 				<button class="heart">
-					<img src={fullHeart} />
+					<img src={isFavorite ? fullHeart : emptyHeart} />
 				</button>
 			</div>
 			<p class="text-middle">{element.name}</p>

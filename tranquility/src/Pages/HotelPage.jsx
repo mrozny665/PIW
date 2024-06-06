@@ -1,12 +1,12 @@
 import { useOutletContext, useParams } from "react-router-dom";
 import emptyHeart from "../Assets/emptyHeart.svg";
-import fullHeart from "../Assets/emptyHeart.svg";
+import fullHeart from "../Assets/fullHeart.svg";
 import iconMail from "../Assets/🦆 icon _mail_.png";
 import { useContext } from "react";
 import MailContext from "../contexts/mailContext";
 
 const HotelPage = () => {
-	const [hotels, setHotels] = useOutletContext();
+	const [hotels, setHotels, favorite, setFavorite] = useOutletContext();
 	const { isMailOpen, setIsMailOpen } = useContext(MailContext);
 	const { id } = useParams();
 
@@ -15,6 +15,8 @@ const HotelPage = () => {
 	};
 
 	const element = hotels.find(findElement);
+
+	const isFavorite = !(favorite.find(findElement) === undefined);
 
 	const stars = () => {
 		let span = "";
@@ -27,11 +29,18 @@ const HotelPage = () => {
 		return <span>{span}</span>;
 	};
 
-	// const toggleFavorite = () => {
-	// 	const favs = favorites;
-	// 	favs.push(element);
-	// 	setFavorites(favs);
-	// };
+	const addToFavorites = () => {
+		const favs = [...favorite];
+		favs.push(element);
+		setFavorite(favs);
+	};
+
+	const removeFromFavorites = () => {
+		const favs = [...favorite];
+		const i = favs.findIndex(findElement);
+		favs.splice(i, 1);
+		setFavorite(favs);
+	};
 
 	return (
 		<div>
@@ -40,9 +49,16 @@ const HotelPage = () => {
 					<p class="title-large">{element.name}</p>
 				</section>
 				<div class="hotel-image-container">
-					<p class="chip">
-						Add to favorites <img src={emptyHeart} />
-					</p>
+					{!isFavorite && (
+						<p class="chip" onMouseDown={() => addToFavorites()}>
+							Add to favorites <img src={emptyHeart} />
+						</p>
+					)}
+					{isFavorite && (
+						<p class="chip" onMouseDown={() => removeFromFavorites()}>
+							Remove from favorites <img src={fullHeart} />
+						</p>
+					)}
 				</div>
 				<article class="hotel-details">
 					<section class="hotel-details-details">

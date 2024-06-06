@@ -56,31 +56,25 @@ function AppLayout() {
 	const { isEditOpen } = useContext(EditContext);
 	const { isMailOpen } = useContext(MailContext);
 	const user = useUser();
-	// const fav1 = localStorage.getItem("favorite");
-	// const fav2 = JSON.parse(fav1);
+	const fav1 = localStorage.getItem("favorite");
+	const fav2 = JSON.parse(fav1);
 
-	// console.log(fav1);
-	// console.log(fav2);
-
-	// const [favorite, setFavorite] = useState(
-	// 	JSON.parse(localStorage.getItem("favorite"))
-	// );
+	const [favorite, setFavorite] = useState(fav2);
 
 	useEffect(() => {
 		readAllHotels().then((docs) => setHotels(docs));
-		// if (favorite == "") setFavorite([]);
+		if (favorite == "" || favorite === null) setFavorite([]);
 	}, []);
 
-	// useEffect(() => {
-	// 	localStorage.setItem("favorite", JSON.stringify(favorite));
-	// 	setFavorite(JSON.parse(localStorage.getItem("favorite")));
-	// }, [favorite]);
+	useEffect(() => {
+		localStorage.setItem("favorite", JSON.stringify(favorite));
+	}, [favorite]);
 
 	return (
 		<div className="App">
 			{!!user || <NavigationOut />}
 			{!!user && <Navigation />}
-			<Outlet context={[hotels, setHotels]} />
+			<Outlet context={[hotels, setHotels, favorite, setFavorite]} />
 			{isAddOpen && <AddNewHotel hotels={hotels} setHotels={setHotels} />}
 			{isEditOpen && <EditHotel hotels={hotels} setHotels={setHotels} />}
 			{isMailOpen && <SendEmail />}
