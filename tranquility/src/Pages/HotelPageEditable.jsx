@@ -2,9 +2,12 @@ import { useOutletContext, useParams } from "react-router-dom";
 import emptyHeart from "../Assets/emptyHeart.svg";
 import deleteIcon from "../Assets/delete.png";
 import editIcon from "../Assets/edit.png";
+import { useContext } from "react";
+import EditContext from "../contexts/editContext";
 
 const HotelPageEditable = () => {
-	const [hotels, setHotels, setIsOpen] = useOutletContext();
+	const [hotels] = useOutletContext();
+	const { isEditOpen, setIsEditOpen } = useContext(EditContext);
 	const { id } = useParams();
 
 	const findElement = (el) => {
@@ -58,7 +61,7 @@ const HotelPageEditable = () => {
 					<button
 						class="button primary"
 						style={{ width: "fit-content" }}
-						onMouseDown={() => setIsOpen(true)}
+						onMouseDown={() => setIsEditOpen(true)}
 					>
 						Edit <img src={editIcon} />
 					</button>

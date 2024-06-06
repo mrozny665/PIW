@@ -1,9 +1,13 @@
 import { useOutletContext, useParams } from "react-router-dom";
 import emptyHeart from "../Assets/emptyHeart.svg";
+import fullHeart from "../Assets/emptyHeart.svg";
 import iconMail from "../Assets/🦆 icon _mail_.png";
+import { useContext } from "react";
+import MailContext from "../contexts/mailContext";
 
 const HotelPage = () => {
-	const [hotels, setHotels, setIsOpen] = useOutletContext();
+	const [hotels, setHotels] = useOutletContext();
+	const { isMailOpen, setIsMailOpen } = useContext(MailContext);
 	const { id } = useParams();
 
 	const findElement = (el) => {
@@ -22,6 +26,12 @@ const HotelPage = () => {
 		}
 		return <span>{span}</span>;
 	};
+
+	// const toggleFavorite = () => {
+	// 	const favs = favorites;
+	// 	favs.push(element);
+	// 	setFavorites(favs);
+	// };
 
 	return (
 		<div>
@@ -54,7 +64,11 @@ const HotelPage = () => {
 							{element.longText}
 						</p>
 					</section>
-					<button class="button primary" style={{ width: "fit-content" }}>
+					<button
+						class="button primary"
+						style={{ width: "fit-content" }}
+						onMouseDown={() => setIsMailOpen(true)}
+					>
 						Contact <img src={iconMail} />
 					</button>
 					<section class="hotel-details-cards">

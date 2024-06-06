@@ -1,6 +1,6 @@
 import "./style.css";
 import Hotels from "./Pages/Hotels";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
 	RouterProvider,
 	Outlet,
@@ -19,10 +19,27 @@ import NavigationOut from "./Components/NavigationOut";
 import Signup from "./Pages/Signup";
 import EditHotel from "./Components/EditHotel";
 import HotelPageEditable from "./Pages/HotelPageEditable";
+import SendEmail from "./Components/SendEmail";
+import AddContext from "./contexts/addContext";
+import { AddProvider } from "./contexts/addContext";
+import EditContext, { EditProvider } from "./contexts/editContext";
+import { MailProvider } from "./contexts/mailContext";
+import MailContext from "./contexts/mailContext";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
-		<Route path="/" element={<AppLayout />}>
+		<Route
+			path="/"
+			element={
+				<AddProvider>
+					<EditProvider>
+						<MailProvider>
+							<AppLayout />
+						</MailProvider>
+					</EditProvider>
+				</AddProvider>
+			}
+		>
 			<Route path="" element={<Hotels />} />
 			<Route path="hotels/:id" element={<HotelPage />} />
 			<Route path="login" element={<Login />} />
@@ -35,25 +52,38 @@ const router = createBrowserRouter(
 
 function AppLayout() {
 	const [hotels, setHotels] = useState([]);
-	const [isOpen, setIsOpen] = useState(false);
-	const [isEditOpen, setIsEditOpen] = useState(false);
+	const { isAddOpen } = useContext(AddContext);
+	const { isEditOpen } = useContext(EditContext);
+	const { isMailOpen } = useContext(MailContext);
 	const user = useUser();
+	// const fav1 = localStorage.getItem("favorite");
+	// const fav2 = JSON.parse(fav1);
+
+	// console.log(fav1);
+	// console.log(fav2);
+
+	// const [favorite, setFavorite] = useState(
+	// 	JSON.parse(localStorage.getItem("favorite"))
+	// );
 
 	useEffect(() => {
 		readAllHotels().then((docs) => setHotels(docs));
+		// if (favorite == "") setFavorite([]);
 	}, []);
+
+	// useEffect(() => {
+	// 	localStorage.setItem("favorite", JSON.stringify(favorite));
+	// 	setFavorite(JSON.parse(localStorage.getItem("favorite")));
+	// }, [favorite]);
 
 	return (
 		<div className="App">
 			{!!user || <NavigationOut />}
-			{!!user && <Navigation set={setIsOpen} />}
-			<Outlet context={[hotels, setHotels, setIsEditOpen]} />
-			{isOpen && (
-				<AddNewHotel set={setIsOpen} hotels={hotels} setHotels={setHotels} />
-			)}
-			{isEditOpen && (
-				<EditHotel set={setIsEditOpen} hotels={hotels} setHotels={setHotels} />
-			)}
+			{!!user && <Navigation />}
+			<Outlet context={[hotels, setHotels]} />
+			{isAddOpen && <AddNewHotel hotels={hotels} setHotels={setHotels} />}
+			{isEditOpen && <EditHotel hotels={hotels} setHotels={setHotels} />}
+			{isMailOpen && <SendEmail />}
 		</div>
 	);
 }

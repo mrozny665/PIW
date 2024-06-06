@@ -3,7 +3,7 @@ import { useOutletContext } from "react-router-dom";
 
 const Hotels = () => {
 	const edit = false;
-	const [hotels, setHotels, setIsOpen] = useOutletContext();
+	const [hotels, setHotels] = useOutletContext();
 	const hotelCards = hotels.map((it) => (
 		<HotelCard key={it.id} element={it} edit={edit} />
 	));

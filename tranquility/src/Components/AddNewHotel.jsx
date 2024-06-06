@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { createHotel } from "../data/hotelsService";
+import AddContext from "../contexts/addContext";
 
-const AddNewHotel = ({ set }) => {
+const AddNewHotel = () => {
+	const { setIsAddOpen } = useContext(AddContext);
 	const [hotelName, setHotelName] = useState("");
 	const [description, setDescription] = useState("");
 	const [location, setLocation] = useState("");
@@ -18,14 +20,16 @@ const AddNewHotel = ({ set }) => {
 			city: location,
 		};
 		createHotel(hotel);
-		set(false);
+		setIsAddOpen(false);
 	};
 
 	return (
 		<modal class="grid modal">
 			<section class="modal-content">
 				<section class="modal-start">
-					<p class="modal-close">&times;</p>
+					<p class="modal-close" onMouseDown={() => setIsAddOpen(false)}>
+						&times;
+					</p>
 					<p class="title-large">Add new offer</p>
 				</section>
 				<section class="modal-section">
@@ -76,7 +80,7 @@ const AddNewHotel = ({ set }) => {
 					</section>
 				</section>
 				<section class="modal-buttons">
-					<p class="button" onClick={() => set(false)}>
+					<p class="button" onClick={() => setIsAddOpen(false)}>
 						Cancel
 					</p>
 					<button

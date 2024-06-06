@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { createHotel, updateHotel } from "../data/hotelsService";
 import { useParams } from "react-router-dom";
+import EditContext from "../contexts/editContext";
 
-const EditHotel = ({ set, hotels }) => {
+const EditHotel = ({ hotels }) => {
+	const { setIsEditOpen } = useContext(EditContext);
 	const [hotelName, setHotelName] = useState("");
 	const [description, setDescription] = useState("");
 	const [location, setLocation] = useState("");
@@ -24,7 +26,7 @@ const EditHotel = ({ set, hotels }) => {
 			city: location,
 		};
 		updateHotel(id, hotel);
-		set(false);
+		setIsEditOpen(false);
 	};
 
 	const init = () => {
@@ -43,7 +45,7 @@ const EditHotel = ({ set, hotels }) => {
 		<modal class="grid modal">
 			<section class="modal-content">
 				<section class="modal-start">
-					<p class="modal-close" onMouseDown={() => set(false)}>
+					<p class="modal-close" onMouseDown={() => setIsEditOpen(false)}>
 						&times;
 					</p>
 					<p class="title-large">Edit offer</p>
@@ -96,7 +98,7 @@ const EditHotel = ({ set, hotels }) => {
 					</section>
 				</section>
 				<section class="modal-buttons">
-					<p class="button" onClick={() => set(false)}>
+					<p class="button" onClick={() => setIsEditOpen(false)}>
 						Cancel
 					</p>
 					<button

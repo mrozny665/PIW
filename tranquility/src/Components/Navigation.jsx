@@ -4,10 +4,11 @@ import { useUser } from "../data/userService";
 import { logout } from "../data/userService";
 import startingHotels from "../data";
 import { createHotel } from "../data/hotelsService";
+import { useContext } from "react";
+import AddContext from "../contexts/addContext";
 
-const Navigation = ({ set }) => {
-	const openAdd = () => {};
-	const user = useUser();
+const Navigation = () => {
+	const { isAddOpen, setIsAddOpen } = useContext(AddContext);
 	const navigate = useNavigate();
 
 	return (
@@ -27,7 +28,7 @@ const Navigation = ({ set }) => {
 				<li>
 					<a
 						className="nav-link"
-						onMouseDown={() => set(true)}
+						onMouseDown={() => setIsAddOpen(true)}
 						style={{ cursor: "pointer" }}
 					>
 						Add new offers
